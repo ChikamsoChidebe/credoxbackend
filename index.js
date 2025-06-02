@@ -11,30 +11,19 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Data storage paths - MOVED UP before they're used
+const DATA_DIR = path.join(__dirname, 'data');
+const USERS_FILE = path.join(DATA_DIR, 'users.json');
+const TRANSACTIONS_FILE = path.join(DATA_DIR, 'transactions.json');
+const PENDING_TRANSACTIONS_FILE = path.join(DATA_DIR, 'pendingTransactions.json');
+const PENDING_KYC_FILE = path.join(DATA_DIR, 'pendingKYC.json');
+
 // For production deployment
 const ALLOWED_ORIGINS = [
   'https://reactproject1-neon.vercel.app',
   'http://localhost:3000',
   'http://localhost:5174'
 ];
-
-// Add this to your server/index.js file
-// Create data directory if it doesn't exist
-if (!fs.existsSync(DATA_DIR)) {
-  try {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-    console.log('Data directory created successfully');
-    
-    // Initialize empty data files
-    fs.writeFileSync(USERS_FILE, JSON.stringify([]), 'utf8');
-    fs.writeFileSync(TRANSACTIONS_FILE, JSON.stringify([]), 'utf8');
-    fs.writeFileSync(PENDING_TRANSACTIONS_FILE, JSON.stringify([]), 'utf8');
-    fs.writeFileSync(PENDING_KYC_FILE, JSON.stringify([]), 'utf8');
-  } catch (err) {
-    console.error('Error creating data directory:', err);
-  }
-}
-
 
 // Middleware
 app.use(cors({
@@ -53,16 +42,14 @@ app.use(cors({
 }));
 app.use(bodyParser.json());
 
-// Data storage paths
-const DATA_DIR = path.join(__dirname, 'data');
-const USERS_FILE = path.join(DATA_DIR, 'users.json');
-const TRANSACTIONS_FILE = path.join(DATA_DIR, 'transactions.json');
-const PENDING_TRANSACTIONS_FILE = path.join(DATA_DIR, 'pendingTransactions.json');
-const PENDING_KYC_FILE = path.join(DATA_DIR, 'pendingKYC.json');
-
 // Create data directory if it doesn't exist
 if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+  try {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+    console.log('Data directory created successfully');
+  } catch (err) {
+    console.error('Error creating data directory:', err);
+  }
 }
 
 // Initialize data files if they don't exist
@@ -82,7 +69,7 @@ initDataFile(USERS_FILE, [
     accountType: 'Admin',
     joinDate: new Date().toISOString().split('T')[0],
     isAdmin: true,
-    cashBalance: 0
+    cashBalance: 1000000
   }
 ]);
 initDataFile(TRANSACTIONS_FILE);
