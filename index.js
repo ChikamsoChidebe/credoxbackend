@@ -21,6 +21,7 @@ const PENDING_KYC_FILE = path.join(DATA_DIR, 'pendingKYC.json');
 // For production deployment
 const ALLOWED_ORIGINS = [
   'https://reactproject1-neon.vercel.app',
+  'https://credox-two.vercel.app',
   'http://localhost:3000',
   'http://localhost:5174'
 ];
