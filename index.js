@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 const ALLOWED_ORIGINS = [
   'https://reactproject1-neon.vercel.app',
   'http://localhost:3000',
-  'http://localhost:5173'
+  'http://localhost:5174'
 ];
 
 // Middleware
