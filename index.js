@@ -18,6 +18,24 @@ const ALLOWED_ORIGINS = [
   'http://localhost:5174'
 ];
 
+// Add this to your server/index.js file
+// Create data directory if it doesn't exist
+if (!fs.existsSync(DATA_DIR)) {
+  try {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+    console.log('Data directory created successfully');
+    
+    // Initialize empty data files
+    fs.writeFileSync(USERS_FILE, JSON.stringify([]), 'utf8');
+    fs.writeFileSync(TRANSACTIONS_FILE, JSON.stringify([]), 'utf8');
+    fs.writeFileSync(PENDING_TRANSACTIONS_FILE, JSON.stringify([]), 'utf8');
+    fs.writeFileSync(PENDING_KYC_FILE, JSON.stringify([]), 'utf8');
+  } catch (err) {
+    console.error('Error creating data directory:', err);
+  }
+}
+
+
 // Middleware
 app.use(cors({
   origin: function(origin, callback) {
