@@ -23,7 +23,8 @@ const ALLOWED_ORIGINS = [
   'https://reactproject1-neon.vercel.app',
   'https://credox-two.vercel.app',
   'http://localhost:3000',
-  'http://localhost:5174'
+  'http://localhost:5174',
+  'https://credoxcom.vercel.app/'
 ];
 
 // Middleware
