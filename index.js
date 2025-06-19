@@ -25,7 +25,8 @@ const ALLOWED_ORIGINS = [
   'http://localhost:3000',
   'http://localhost:5174',
   'https://credoxcom.vercel.app',
-  'https://creditsxonline.com'
+  'https://creditsxonline.com',
+  'https://www.creditsxonline.com'
 ];
 
 // Middleware
